@@ -52,15 +52,15 @@ function add_user {
 }
 
 function change_ssh {
-	echo "ClientAliveInterval 30\n" >> /etc/ssh/sshd_config
-	echo "TCPKeepAlive yes \n" >> /etc/ssh/sshd_config
-	echo "ClientAliveCountMax 99999\n" >> /etc/ssh/sshd_config
+	echo "ClientAliveInterval 30" >> /etc/ssh/sshd_config
+	echo "TCPKeepAlive yes" >> /etc/ssh/sshd_config
+	echo "ClientAliveCountMax 99999" >> /etc/ssh/sshd_config
 	echo "Port 4500" >> /etc/ssh/sshd_config
 	echo "PermitRootLogin no" >> /etc/ssh/sshd_config
 	echo "AllowUsers $username" >> /etc/ssh/sshd_config
 	service sshd restart
-	$ip = ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'
-	echo "-----  ssh $username@$ip -p 4500"
+	#$ip = ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'
+	echo "-----  ssh $username@ip -p 4500"
 }
 
 function make_swap {
