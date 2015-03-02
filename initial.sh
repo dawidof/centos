@@ -78,9 +78,11 @@ function install_psql {
 
 
 function install_ruby {
+	sudo chown $whoami:$whoami .ssh -R
+	sudo chown $whoami:$whoami .gemrc
 	gpg2 --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
 	curl -L get.rvm.io | bash -s stable
-	echo "\nsource ~/.profile" >> ~/.bash_profile
+	echo "source ~/.profile" >> ~/.bash_profile
 	rvm install 2.2.0
 	rvm use 2.2.0
 
