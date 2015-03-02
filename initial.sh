@@ -24,6 +24,7 @@ function install_basics {
     yum -y install wget curl rsync git sudo vim make which mlocate man vixie-cron readline-devel bzip2 nano mc
     yum -y install gcc gcc-c++ gettext-devel expat-devel curl-devel zlib-devel openssl-devel perl cpio 
     yum -y install pinfo
+    yum -y groupinstall 'Development Tools' >/dev/null
     echo "Installed Basics"
 }
 
@@ -40,6 +41,14 @@ function add_user {
 
 	echo "%wheel        ALL=(ALL)       ALL" >> /etc/sudoers
     echo "created wheel group"
+
+    echo "COPY FROM YOUR LOCAL MACHINE: cat ~/.ssh/id_rsa.pub"
+    read idrsa
+    mkdir /home/$username/.ssh
+	chmod 700 /home/$username/.ssh
+	touch /home/$username/.ssh/authorized_keys
+	echo "$idrsa" >> /home/$username/.ssh/authorized_keys
+	chmod 600 /home/$username/.ssh/authorized_keys
 }
 
 function change_ssh {
